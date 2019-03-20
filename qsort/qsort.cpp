@@ -71,9 +71,40 @@ void display( const RandomAccessIterator begin,
 // A COMPLETER
 
 template < typename RandomAccessIterator >
+RandomAccessIterator partition( RandomAccessIterator begin,
+               RandomAccessIterator end )
+{
+   auto i = begin-1;
+   auto j = end;
+   while(true)
+   {
+      while(*i < *end) ++i;
+      while(j > begin and *end < *j) --j;
+
+      if(*i >= *j) break;
+
+      swap(*i, *j);
+   }
+   swap(*i, *end);
+   display( begin, i, end );
+   return i;
+}
+
+template < typename RandomAccessIterator >
 void quickSort( RandomAccessIterator begin,
                RandomAccessIterator end )
 {
+
+   if(end <= begin) return;
+
+   auto pivot = selectPivot(begin, end);
+
+   if(pivot != (end-1)) swap(*pivot, *(end-1));
+
+   auto i = partition(begin, (end-1));
+
+   quickSort(begin, i-1);
+   quickSort(i+1, (end-1));
     
 }
 
