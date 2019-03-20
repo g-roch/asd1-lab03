@@ -10,6 +10,7 @@
 #include <climits>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -48,9 +49,13 @@ template < typename RandomAccessIterator >
 void selectionSort( RandomAccessIterator begin,
                    RandomAccessIterator end )
 {
-   
-    // A COMPLETER
+    auto min = begin;
 
+    for(auto it = begin; it != end-1; ++it){
+        min = min_element(it,end);
+        swap(*it,*min);
+        display(begin,it,min,end);
+    }
 }
 
 // main
