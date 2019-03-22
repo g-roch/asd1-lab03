@@ -82,7 +82,7 @@ int main(int argc, const char * argv[]) {
     
     string s("EXEMPLE_DE_TRI_SELECTION");
     display(s.begin(),s.end(),s.end(),s.end());
-    
+
     selectionSort(s.begin(),s.end());
     
     display(s.begin(),s.end(),s.end(),s.end());

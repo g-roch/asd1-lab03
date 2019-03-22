@@ -55,9 +55,9 @@ void display( const RandomAccessIterator begin,
              const RandomAccessIterator pivot,
              const RandomAccessIterator end )
 {
-    for(auto it = begin; it<pivot; ++it) cout << *it << " ";
-    cout << "[" << *pivot << "] ";
-    for(auto it = pivot+1; it<end; ++it) cout << *it << " ";
+    for(auto it = begin; it<pivot; ++it) cout << " " << *it << " ";
+    cout << "[" << *pivot << "]";
+    for(auto it = pivot+1; it<end; ++it) cout << " " << *it << " ";
     cout << endl;
 }
 
@@ -69,24 +69,30 @@ void display( const RandomAccessIterator begin,
 // partition
 //
 // A COMPLETER
-
+//
 template < typename RandomAccessIterator >
 RandomAccessIterator partition( RandomAccessIterator begin,
-               RandomAccessIterator end )
+               RandomAccessIterator end,
+               RandomAccessIterator pivot)
 {
-   auto i = begin-1;
-   auto j = end;
+   auto i = begin - 1;
+   auto j = end - 1;
+
    while(true)
    {
-      while(*i < *end) ++i;
-      while(j > begin and *end < *j) --j;
+      do
+         ++i;
+      while(*i < *pivot);
 
-      if(*i >= *j) break;
+      do
+         --j;
+      while(j > begin and *pivot < *j);
+
+      if(i >= j) break;
 
       swap(*i, *j);
    }
-   swap(*i, *end);
-   display( begin, i, end );
+   swap(*i, *pivot);
    return i;
 }
 
@@ -95,17 +101,21 @@ void quickSort( RandomAccessIterator begin,
                RandomAccessIterator end )
 {
 
-   if(end <= begin) return;
+   const auto hi = end-1;
+
+   if(hi <= begin) return;
 
    auto pivot = selectPivot(begin, end);
 
-   if(pivot != (end-1)) swap(*pivot, *(end-1));
+   if(pivot != hi) swap(*pivot, *hi);
 
-   auto i = partition(begin, (end-1));
+   auto i = partition(begin, end, hi);
+   
+   display( begin, i, end );
 
-   quickSort(begin, i-1);
-   quickSort(i+1, (end-1));
-    
+   quickSort(begin, i);
+   quickSort(i+1, end);
+
 }
 
 
