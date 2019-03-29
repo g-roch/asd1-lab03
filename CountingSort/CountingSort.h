@@ -34,9 +34,9 @@ fois de plus
             RandomAccessIterator last,
             RandomAccessIterator output,
             Fn key,
-            size_t max_key = -1)
+            size_t max_key = (size_t) -1)
       {
-         if(max_key == -1)
+         if(max_key == (size_t) -1)
          {
             max_key = 0;
             for(auto it = first; it != last; ++it)
@@ -55,7 +55,6 @@ fois de plus
 
          for(size_t& i : count) i--;
 
-         size_t j = 0;
          //for(auto it = first; it != last; ++it)
          for(auto it = last-1; it != first-1; --it)
          {
