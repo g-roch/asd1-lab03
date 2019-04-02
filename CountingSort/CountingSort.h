@@ -75,10 +75,11 @@ https://en.wikipedia.org/wiki/Radix_sort
    {
       std::vector<unsigned int> m(v.size());
 
-      CountingSort(v.begin(), v.end(), m.begin(), [](unsigned int i) { return (i >> (8*0)) & 255  ; }, 255);
-      CountingSort(m.begin(), m.end(), v.begin(), [](unsigned int i) { return (i >> (8*1)) & 255  ; }, 255);
-      CountingSort(v.begin(), v.end(), m.begin(), [](unsigned int i) { return (i >> (8*2)) & 255  ; }, 255);
-      CountingSort(m.begin(), m.end(), v.begin(), [](unsigned int i) { return (i >> (8*3)) & 255  ; }, 255);
+      for(int j = 0; j < 4; ++j)
+      {
+        CountingSort(v.begin(), v.end(), m.begin(), [j](unsigned int i) { return (i >> (8*j)) & 255  ; }, 255);
+        swap(m, v);
+      }
       
       // a compléter
    }
