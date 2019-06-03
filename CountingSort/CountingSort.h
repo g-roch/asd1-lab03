@@ -80,8 +80,6 @@ https://en.wikipedia.org/wiki/Radix_sort
         CountingSort(v.begin(), v.end(), m.begin(), [j](unsigned int i) { return (i >> (8*j)) & 255  ; }, 255);
         swap(m, v);
       }
-      
-      // a compléter
    }
 }
 

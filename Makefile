@@ -6,7 +6,7 @@ CXXFLAGS= -g -std=c++11 -Wall -Wconversion -Wextra -pedantic
 all2: test
 	./test
 
-test: select/selectAlgo.cpp
+test: 
 
 all: select/select qsort/qsort CountingSort/main
 

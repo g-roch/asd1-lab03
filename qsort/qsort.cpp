@@ -67,11 +67,53 @@ void display( const RandomAccessIterator begin,
 // et end (non inclus). Doit appeler selectPivot(...)
 // pour le choix du pivot, et display() après chaque
 // partition
-//
-// A COMPLETER
-//
-//
-#include "qsortAlgo.cpp"
+template < typename RandomAccessIterator >
+RandomAccessIterator partition( RandomAccessIterator begin,
+               RandomAccessIterator end,
+               RandomAccessIterator pivot)
+{
+   auto i = begin - 1;
+   auto j = end - 1;
+
+   while(true)
+   {
+      do
+         ++i;
+      while(*i < *pivot);
+
+      do
+         --j;
+      while(j > begin and *pivot < *j);
+
+      if(i >= j) break;
+
+      swap(*i, *j);
+   }
+   swap(*i, *pivot);
+   return i;
+}
+
+template < typename RandomAccessIterator >
+void quickSort( RandomAccessIterator begin,
+               RandomAccessIterator end )
+{
+
+   const auto hi = end-1;
+
+   if(hi <= begin) return;
+
+   auto pivot = selectPivot(begin, end);
+
+   if(pivot != hi) swap(*pivot, *hi);
+
+   auto i = partition(begin, end, hi);
+   
+   display( begin, i, end );
+
+   quickSort(begin, i);
+   quickSort(i+1, end);
+
+}
 
 // main
 //
